@@ -3,6 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import streamlit as st
 import os
 import playlist_creator
+import pandas as pd
 
 with open('styles.css') as f:
   st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -12,7 +13,6 @@ client_secret = st.secrets["CLIENT_SECRET"]
 
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
 
 st.markdown("<h1 style='text-align: center; font-size: 60px'>TrackExplorer</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; margin-top: 6px; font-size: 15px'> A web-based API for music lovers. Discover a similar artist, <p>", unsafe_allow_html=True)
@@ -24,8 +24,8 @@ search_selected = st.sidebar.selectbox("Search By: ", search_choices)
 search_keyword = st.text_input(search_selected + " (Keyword Search)")
 
 search_results = []
-tracks =[] 
-artists =[]
+tracks = [] 
+artists = []
 
 if search_keyword is not None and len(str(search_keyword)) > 0:
   if search_selected == 'Song/Track':
@@ -53,20 +53,17 @@ elif search_selected == 'Artist':
   selected_artist = st.selectbox("Select the artist: ", search_results)
 
 def get_recommendations(selected_track):
-    # Get track URI
     results = sp.search(q=selected_track, type='track')
     track_uri = results['tracks']['items'][0]['uri']
 
-    # Get recommended tracks
     recommendations = sp.recommendations(seed_tracks=[track_uri])['tracks']
     return recommendations
 
-to_add_tracks = []
-
-@st.cache
-def add_tracks (track_id):
-  to_add_tracks.append(track_id)
-  
+def display_audio(track):
+    if track['preview_url'] is not None:
+      cols[1].audio(track['preview_url'], format='audio/mp3', start_time=0)
+    else:
+      cols[1].write("No preview available for this track.")
 
 if selected_track is not None and len(tracks)>0:
   tracks_list = tracks['tracks']['items']
@@ -80,34 +77,30 @@ if selected_track is not None and len(tracks)>0:
         img_album = track['album']['images'][1]['url']
         recommendations = get_recommendations(selected_track)
         
-        for track in recommendations:
+        with st.form(f"{track['id']}", clear_on_submit=False, border = False):
+          choice_list =[]
+          st.write('')
+          submitted = st.form_submit_button("Add Selected Songs")
+
+          for track in recommendations:
             cols = st.columns(2)
             cols[0].image(track['album']['images'][0]['url'])
-            cols[1].write(track['name'])
-            cols[1].write("Artist: " + track['artists'][0]['name'])
+            cols[1].write(f"#### **{track['name']}**")
+            cols[1].write(f"**Artist:** " + track['artists'][0]['name'])
+            display_audio(track)
 
-            if track['preview_url'] is not None:
-              cols[1].audio(track['preview_url'], format='audio/mp3', start_time=0)
-            else:
-              cols[1].write("No preview available for this track.")
+            save_key =  f"save_key{track['id']}"          
+            save_btn = cols[1].checkbox("Select Song", key={track['id']}, value = False)
+            is_clicked = st.session_state[{track['id']}]
 
-            add_key =  f"add_btn_{track['id']}"
-            add_btn = cols[1].button("Add to Playlist", key = add_key)
+            if save_btn == True:
+              choice_list.append(track['name'])
+          
+          if submitted:
+            st.write(choice_list)
 
-  if "add_state" not in st.session_state: 
-    st.session_state.add_state = False
+        
             
-  if add_btn or st.session_state.add_state:
-    st.session_state.add_state = True
-    add_tracks(track['id'])
-    cols[1].write("Added to playlist!")
-
-
-
-
-
-
-
 def get_related_artists(artist_name, artist_uri):
   results = sp.search(q=artist_name, type='artist')
   items = results['artists']['items']
@@ -129,7 +122,7 @@ if selected_artist is not None and len(artists)>0:
           artist_id = artist['id']
           cols[0].image(artist['images'][0]['url'])
           with cols[1]:
-            st.write(f"**{artist['name']}**")
+            st.write(f"#### **{artist['name']}**")
             st.write(f"**Followers:** {artist['followers']['total']}")
             st.write(f"**Genres:** {', '.join(artist['genres'])}")
             with st.expander(f"**Top Songs:**"):
