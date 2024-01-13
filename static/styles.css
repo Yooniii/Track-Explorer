@@ -1,0 +1,40 @@
+
+img{
+  margin-top: 0;
+  margin-bottom: 100px;
+  height: 280px;
+  width: 280px;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
+div.st-emotion-cache-1788y8l.e1f1d6gn2 {
+  display: block;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+div.st-emotion-cache-1kyxreq.e115fcil2 {
+  margin: auto;
+  align-items: center;
+  display: flex;
+  align-content: center;
+}
+
+div.element-container.st-emotion-cache-8eap7d.e1f1d6gn4 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display:flex;
+  align-items: flex-start;
+}
+div.element-cache-1njjmvq.e1f1d6gn2{
+  background-color: blue;
+  gap: 0px;
+  } 
+  
+div.stMarkdown {
+  margin-bottom: -30px;
+}
