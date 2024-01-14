@@ -2,7 +2,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import streamlit as st
 import os
-import playlist_creator
 import pandas as pd
 
 with open('styles.css') as f:
