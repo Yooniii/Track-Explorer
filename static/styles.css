@@ -1,20 +1,14 @@
-
 img{
-  margin-top: 0;
-  margin-bottom: 100px;
+  margin-top: 30px;
   height: 280px;
   width: 280px;
 }
 
-p {
-  margin-bottom: 30px;
-}
-
+/* Text box containing track data*/
 div.st-emotion-cache-1788y8l.e1f1d6gn2 {
   display: block;
   align-items: center;
   text-align: center;
-  margin: auto;
 }
 
 div.st-emotion-cache-1kyxreq.e115fcil2 {
@@ -30,11 +24,15 @@ div.element-container.st-emotion-cache-8eap7d.e1f1d6gn4 {
   display:flex;
   align-items: flex-start;
 }
-div.element-cache-1njjmvq.e1f1d6gn2{
-  background-color: blue;
-  gap: 0px;
-  } 
-  
-div.stMarkdown {
-  margin-bottom: -30px;
+
+span.st-emotion-cache-10trblm.e1nzilvr1 {
+  margin-top: 10px;
+}
+
+audio#audio.stAudio {
+  margin-top: 0px;
+} 
+
+div.st-emotion-cache-keje6w.e1f1d6gn3 {
+  margin-bottom: 70px;
 }

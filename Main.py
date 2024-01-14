@@ -4,7 +4,7 @@ import streamlit as st
 import os
 import pandas as pd
 
-with open('styles.css') as f:
+with open('./static/styles.css') as f:
   st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 client_id = st.secrets["CLIENT_ID"]
@@ -86,11 +86,9 @@ if selected_track is not None and len(tracks)>0:
             cols[0].image(track['album']['images'][0]['url'])
             cols[1].write(f"#### **{track['name']}**")
             cols[1].write(f"**Artist:** " + track['artists'][0]['name'])
-            display_audio(track)
-
-            save_key =  f"save_key{track['id']}"          
+            save_key = (f"save_key{track['id']}")          
             save_btn = cols[1].checkbox("Select Song", key={track['id']}, value = False)
-            is_clicked = st.session_state[{track['id']}]
+            display_audio(track)
 
             if save_btn == True:
               choice_list.append(track['name'])
