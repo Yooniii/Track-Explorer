@@ -2,7 +2,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import streamlit as st
 import os
-import pandas as pd
 
 with open('./static/styles.css') as f:
   st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
