@@ -18,8 +18,8 @@ enter the name of the artist/track you want to find similar music to, and the ap
 <div align="center"> 
 <img width="320" height="350" alt="tracks_img" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/596773ed-7702-4dce-b5de-ad102a37193e">
 <img width="320" height="350" alt="artists_img" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/7c966ccb-b12d-4b10-a785-3be244b0b0d0">
-
 </div>
+
 
 Note: The ability to save songs and generate a new playlist on Spotify is still being developed. 
 
