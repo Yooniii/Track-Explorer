@@ -16,8 +16,8 @@ After running the app, you should see a sidebar on the right with the option to 
 enter the name of the artist/track you want to find similar music to, and the app will display the recommendations on the screen.
 
 <div align="center"> 
-<img width="766" alt="artist_recs" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/90734abf-8df7-4f8e-9f04-62ec16265442">
-<img width="725" alt="track_recs" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/f4aac798-6dc2-4523-bba7-f3fdc19a20bb">
+<img width="366" alt="artist_recs" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/90734abf-8df7-4f8e-9f04-62ec16265442">
+<img width="325" alt="track_recs" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/f4aac798-6dc2-4523-bba7-f3fdc19a20bb">
 </div>
 
 
