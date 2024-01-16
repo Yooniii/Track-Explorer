@@ -16,12 +16,12 @@ After running the app, you should see a sidebar on the right with the option to 
 enter the name of the artist/track you want to find similar music to, and the app will display the recommendations on the screen.
 
 <div align="center"> 
-<img width="366" alt="artist_recs" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/90734abf-8df7-4f8e-9f04-62ec16265442">
-<img width="325" alt="track_recs" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/f4aac798-6dc2-4523-bba7-f3fdc19a20bb">
+<img width="635" alt="tracks_img" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/596773ed-7702-4dce-b5de-ad102a37193e">
+<img width="618" alt="artists_img" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/7c966ccb-b12d-4b10-a785-3be244b0b0d0">
+
 </div>
 
-
-# Note: The ability to save songs and generate a new playlist in Spotify is still in development. 
+Note: The ability to save songs and generate a new playlist on Spotify is still being developed. 
 
 # Deployment
 Streamlit link: https://track-explorer-kb5mvrkyccgpxwqxdyx7xn.streamlit.app/ 
