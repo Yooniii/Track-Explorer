@@ -43,9 +43,6 @@ def display_tracks(tracks_list, selected_track):
     str_temp = track['name'] + " - By: " + track['artists'][0]['name']
     
     if str_temp == selected_track:
-      track_id = track['id']
-      track_album = track['album']['name']
-      img_album = track['album']['images'][1]['url']
       recommendations = get_recommendations(selected_track)
           
       with st.form(f"{track['id']}", clear_on_submit=False, border = False):
@@ -113,6 +110,10 @@ def main():
         if selected_track is not None and len(tracks) > 0:
           tracks_list = tracks['tracks']['items']
           display_tracks(tracks_list, selected_track)
+        
+      else:
+        st.write("That track does not exist in our database.")
+
 
     else:
       artists = sp.search(q='artist::'+ search_keyword, type='artist', limit=20)
@@ -123,8 +124,11 @@ def main():
           search_results.append(artist['name'])
         selected_artist = st.selectbox("Select the artist: ", search_results)
         
-        if selected_artist is not None and len(artists)>0:
+        if selected_artist is not None and len(artists) > 0:
           artist = artists['artists']['items']
           display_artists(artists_list, selected_artist)
-          
+        
+      else:
+        st.write("That artist does not exist in our database.")
+        
 main()
