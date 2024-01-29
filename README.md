@@ -18,9 +18,7 @@ enter the name of the artist/track you want to find similar music to, and the ap
 Note: The ability to save songs and generate a new playlist on Spotify is still being developed. 
 
 # Example
-<div align="center"> 
 <img width="510" height="550" alt="artists_img" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/7c966ccb-b12d-4b10-a785-3be244b0b0d0">
-</div>
 
 # Deployment
 Streamlit link: https://track-explorer-kb5mvrkyccgpxwqxdyx7xn.streamlit.app/ 
