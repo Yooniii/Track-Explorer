@@ -21,4 +21,4 @@ Note: The ability to save songs and generate a new playlist on Spotify is still 
 <img width="510" height="550" alt="artists_img" src="https://github.com/Yooniii/Track-Explorer/assets/111259968/7c966ccb-b12d-4b10-a785-3be244b0b0d0">
 
 # Deployment
-Streamlit link: https://track-explorer-kb5mvrkyccgpxwqxdyx7xn.streamlit.app/ 
+https://track-explorer-kb5mvrkyccgpxwqxdyx7xn.streamlit.app/ 
