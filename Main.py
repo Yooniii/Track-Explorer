@@ -1,5 +1,5 @@
-import spotipy 
 from spotipy.oauth2 import SpotifyClientCredentials
+import spotipy 
 import streamlit as st
 import os
 
@@ -19,6 +19,8 @@ def display_header():
   st.markdown("<h1 style='text-align: center; font-size: 60px'>TrackExplorer</h1>", unsafe_allow_html=True)
   st.markdown("<p style='text-align: center; margin-top: 6px; font-size: 15px'> A music-recommendation system for music lovers. Discover a similar <p>", unsafe_allow_html=True)
   st.markdown("<p style='text-align: center; margin-top: -20px; margin-bottom: 40px; font-size: 15px'>artist, listen to new track recommendations or build a new playlist.  <p>", unsafe_allow_html=True)
+  st.markdown("<p style='text-align: center; margin-top: 6px; font-size: 15px'> EDIT: As of 2025, the Spotify API endpoint used to generate song/artist recommendations has been deprecated. Currently working on a fix... <p>", unsafe_allow_html=True)
+
 
 def get_recommendations(selected_track):
   results = sp.search(q=selected_track, type='track')
@@ -26,17 +28,29 @@ def get_recommendations(selected_track):
   recommendations = sp.recommendations(seed_tracks=[track_uri])['tracks']
   return recommendations
 
-def get_related_artists(artist_name, artist_uri):
-  results = sp.search(q=artist_name, type='artist')
-  items = results['artists']['items']
-  related_artists = sp.artist_related_artists(artist_uri)['artists']
-  return related_artists
+def get_related_artists(artist_name):
+  results = sp.search(q=artist_name, type='artist', limit=1)
+  if not results['artists']['items']:
+    return []
+
+  artist = results['artists']['items'][0]
+  genres = artist.get('genres', [])
+    
+  if not genres:
+    return []
+
+  # Search for another artist in the same genre
+  genre_query = f"genre:{genres[0]}"  # Use the first genre
+  similar_artists = sp.search(q=genre_query, type='artist', limit=10)['artists']['items']
+    
+  return similar_artists
+
 
 def display_audio(track, col):
-    if track['preview_url'] is not None:
-      col.audio(track['preview_url'], format='audio/mp3', start_time=0)
-    else:
-      col.write("No preview available for this track.")
+  if track['preview_url'] is not None:
+    col.audio(track['preview_url'], format='audio/mp3', start_time=0)
+  else:
+    col.write("No preview available for this track.")
 
 def display_tracks(tracks_list, selected_track):
   for track in tracks_list:
@@ -69,7 +83,7 @@ def display_artists(artists_list, selected_artist):
   for artist in artists_list:
     if selected_artist == artist['name']:
       artist_uri = artist['uri']
-      related_artists = get_related_artists(selected_artist, artist_uri)
+      related_artists = get_related_artists(selected_artist)
 
       for artist in related_artists:
         cols = st.columns(2)
@@ -101,19 +115,15 @@ def main():
     if search_selected == 'Song/Track':
       tracks = sp.search(q='track:'+ search_keyword, type='track', limit=15)
       tracks_list = tracks['tracks']['items']
-      
       if len(tracks_list) > 0:
         for track in tracks_list: 
           search_results.append(track['name'] +" - By: " + track['artists'][0]['name'])
         selected_track = st.selectbox("Select the song/track: ", search_results)
-        
         if selected_track is not None and len(tracks) > 0:
           tracks_list = tracks['tracks']['items']
           display_tracks(tracks_list, selected_track)
-        
       else:
         st.write("That track does not exist in our database.")
-
 
     else:
       artists = sp.search(q='artist::'+ search_keyword, type='artist', limit=20)
