@@ -1,5 +1,7 @@
 # Track Explorer
 
+Edit: As of April 2025, the Spotify API endpoint used to generate recommendations has been deprecated. Currently working on a fix... 
+
 This is a simple music recommendation system built with Python and Streamlit. The app provides similar track or artist recommendations
 based on user input using Spotipy and Spotify API.
 
