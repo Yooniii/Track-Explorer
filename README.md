@@ -9,7 +9,7 @@ To run this app on your local machine, you need to have Python 3 and pip install
   1. Clone this repository: git clone https://github.com/your-username/your-repo.git
   2. Navigate to the project directory: cd your-repo
   3. Install the required libraries: pip install -r requirements.txt
-  4. Run the app: streamlit run app.py
+  4. Run the app: streamlit run main.py
 
 # Usage
 After running the app, you should see a sidebar on the right with the option to get track or artist recommendations. Simply
